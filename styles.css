@@ -167,6 +167,11 @@ h3 {
   background: color-mix(in srgb, currentColor 10%, transparent);
 }
 
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
 .hero-visual {
   display: grid;
   gap: 18px;
@@ -367,6 +372,12 @@ pre {
 .output-panel {
   display: grid;
   gap: 16px;
+}
+
+.output-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .join-form label {

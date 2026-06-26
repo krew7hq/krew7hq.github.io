@@ -1,6 +1,6 @@
 # Formulaire d'entrée
 
-Objectif: filtrer sans exclure inutilement. Le formulaire doit aider une personne à se situer et aider Krew7 à lui proposer une première action concrète.
+Objectif: filtrer sans exclure inutilement. Le formulaire doit aider une personne à se situer et aider Krew7 à lui proposer une première action concrète. Tant que le formulaire officiel n'est pas connecté, les candidatures passent par email à `krew7hq@proton.me`.
 
 ## Titre
 

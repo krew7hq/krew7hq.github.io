@@ -35,7 +35,7 @@
         <p class="eyebrow">Premier cercle</p>
         <h1>Rejoindre Krew7.</h1>
         <p class="lead">
-          Prépare une candidature courte, concrète et exploitable. Tant que le formulaire officiel n'est pas connecté, cette page génère un texte à copier.
+          Prépare une candidature courte, concrète et exploitable. Cette page génère un texte à envoyer à krew7hq@proton.me.
         </p>
       </section>
 
@@ -136,12 +136,15 @@
           <p class="eyebrow">Sortie</p>
           <h2 id="application-title">Texte à envoyer.</h2>
           <p>
-            Copie ce texte dans le futur formulaire, dans un email ou dans le canal d'accueil.
+            Envoie ce texte à krew7hq@proton.me ou copie-le si ton client mail ne s'ouvre pas.
           </p>
         </div>
         <div class="output-panel">
           <textarea id="application-text" rows="18" readonly></textarea>
-          <button class="button secondary" id="copy-application" type="button">Copier</button>
+          <div class="output-actions">
+            <a class="button primary" id="email-application" href="mailto:krew7hq@proton.me" aria-disabled="true">Envoyer par email</a>
+            <button class="button secondary" id="copy-application" type="button">Copier</button>
+          </div>
           <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
         </div>
       </section>
@@ -150,8 +153,10 @@
     <script>
       const form = document.querySelector("#join-form");
       const output = document.querySelector("#application-text");
+      const emailButton = document.querySelector("#email-application");
       const copyButton = document.querySelector("#copy-application");
       const copyStatus = document.querySelector("#copy-status");
+      const recipient = "krew7hq@proton.me";
 
       function value(data, key) {
         return (data.get(key) || "").toString().trim() || "Non renseigné";
@@ -185,8 +190,18 @@ ${value(data, "delivery")}
 
 ${value(data, "problem")}
 `;
+        const subject = `Candidature Krew7 - ${value(data, "name")}`;
+        emailButton.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(output.value)}`;
+        emailButton.setAttribute("aria-disabled", "false");
         copyStatus.textContent = "Candidature générée.";
         output.focus();
+      });
+
+      emailButton.addEventListener("click", (event) => {
+        if (!output.value.trim()) {
+          event.preventDefault();
+          copyStatus.textContent = "Génère d'abord la candidature.";
+        }
       });
 
       copyButton.addEventListener("click", async () => {
