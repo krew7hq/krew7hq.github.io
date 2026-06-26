@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rejoindre Krew7</title>
+    <meta
+      name="description"
+      content="Préparer une candidature pour rejoindre le premier cercle Krew7."
+    >
+    <meta name="theme-color" content="#22C55E">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rejoindre Krew7">
+    <meta property="og:description" content="Préparer une candidature courte, concrète et exploitable pour rejoindre le premier cercle Krew7.">
+    <meta property="og:image" content="./assets/og-krew7.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rejoindre Krew7">
+    <meta name="twitter:description" content="Préparer une candidature pour construire quand même.">
+    <meta name="twitter:image" content="./assets/og-krew7.svg">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="Krew7 accueil">Krew7</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="./index.html#fonctionnement">Fonctionnement</a>
+        <a href="./index.html#chantiers">Chantiers</a>
+        <a href="./MANIFESTE.md">Manifeste</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <p class="eyebrow">Premier cercle</p>
+        <h1>Rejoindre Krew7.</h1>
+        <p class="lead">
+          Prépare une candidature courte, concrète et exploitable. Tant que le formulaire officiel n'est pas connecté, cette page génère un texte à copier.
+        </p>
+      </section>
+
+      <section class="form-section" aria-labelledby="join-form-title">
+        <div>
+          <p class="eyebrow">Formulaire</p>
+          <h2 id="join-form-title">Ce qu'on doit comprendre vite.</h2>
+          <p>
+            Krew7 cherche des gens capables de construire une expérience prouvable: code, design, documentation, recherche, contenu, organisation ou projet cadré.
+          </p>
+        </div>
+
+        <form class="join-form" id="join-form">
+          <label>
+            Nom ou pseudo
+            <input name="name" autocomplete="name" required>
+          </label>
+
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+
+          <label>
+            Lien public utile
+            <input name="link" type="url" placeholder="GitHub, LinkedIn, portfolio, projet...">
+          </label>
+
+          <label>
+            Profil principal
+            <select name="profile" required>
+              <option value="">Choisir</option>
+              <option>Développeur</option>
+              <option>Designer</option>
+              <option>Maker</option>
+              <option>Étudiant</option>
+              <option>Entrepreneur</option>
+              <option>Ops / organisation</option>
+              <option>Mentor</option>
+              <option>Scout</option>
+              <option>Autre</option>
+            </select>
+          </label>
+
+          <label>
+            Ce que tu sais déjà faire
+            <textarea name="skills" rows="4" required></textarea>
+          </label>
+
+          <label>
+            L'expérience que tu veux construire
+            <textarea name="learning" rows="4" required></textarea>
+          </label>
+
+          <label>
+            Ce que tu peux livrer dans les 30 prochains jours
+            <textarea name="delivery" rows="4" required></textarea>
+          </label>
+
+          <label>
+            Disponibilité hebdomadaire
+            <select name="availability" required>
+              <option value="">Choisir</option>
+              <option>Moins de 1 h</option>
+              <option>1 à 2 h</option>
+              <option>3 à 5 h</option>
+              <option>Plus de 5 h</option>
+            </select>
+          </label>
+
+          <label>
+            Ce que ton CV ne prouve pas encore assez
+            <textarea name="problem" rows="5" required></textarea>
+          </label>
+
+          <label>
+            Ce que tu veux faire maintenant
+            <select name="intent" required>
+              <option value="">Choisir</option>
+              <option>Rejoindre un projet existant</option>
+              <option>Proposer un projet cadré</option>
+              <option>Aider à structurer Krew7</option>
+              <option>Observer d'abord puis contribuer</option>
+            </select>
+          </label>
+
+          <label class="checkbox-label">
+            <input name="opensource" type="checkbox" required>
+            J'accepte de contribuer dans un cadre open source ou d'en discuter avant de publier.
+          </label>
+
+          <button class="button primary" type="submit">Générer ma candidature</button>
+        </form>
+      </section>
+
+      <section class="application-output" aria-labelledby="application-title">
+        <div>
+          <p class="eyebrow">Sortie</p>
+          <h2 id="application-title">Texte à envoyer.</h2>
+          <p>
+            Copie ce texte dans le futur formulaire, dans un email ou dans le canal d'accueil.
+          </p>
+        </div>
+        <div class="output-panel">
+          <textarea id="application-text" rows="18" readonly></textarea>
+          <button class="button secondary" id="copy-application" type="button">Copier</button>
+          <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector("#join-form");
+      const output = document.querySelector("#application-text");
+      const copyButton = document.querySelector("#copy-application");
+      const copyStatus = document.querySelector("#copy-status");
+
+      function value(data, key) {
+        return (data.get(key) || "").toString().trim() || "Non renseigné";
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        output.value = `# Candidature Krew7
+
+Nom ou pseudo: ${value(data, "name")}
+Email: ${value(data, "email")}
+Lien public: ${value(data, "link")}
+Profil: ${value(data, "profile")}
+Disponibilité: ${value(data, "availability")}
+Intention: ${value(data, "intent")}
+
+## Ce que je sais déjà faire
+
+${value(data, "skills")}
+
+## L'expérience que je veux construire
+
+${value(data, "learning")}
+
+## Ce que je peux livrer dans les 30 prochains jours
+
+${value(data, "delivery")}
+
+## Ce que mon CV ne prouve pas encore assez
+
+${value(data, "problem")}
+`;
+        copyStatus.textContent = "Candidature générée.";
+        output.focus();
+      });
+
+      copyButton.addEventListener("click", async () => {
+        if (!output.value.trim()) {
+          copyStatus.textContent = "Génère d'abord la candidature.";
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(output.value);
+          copyStatus.textContent = "Copié.";
+        } catch {
+          output.select();
+          copyStatus.textContent = "Sélectionne le texte puis copie-le.";
+        }
+      });
+    </script>
+  </body>
+</html>

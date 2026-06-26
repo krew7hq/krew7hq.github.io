@@ -1,0 +1,9 @@
+{
+  "name": "Krew7",
+  "short_name": "Krew7",
+  "description": "Krew7 crée de l'expérience prouvable avec des projets open source visibles.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#22C55E"
+}
